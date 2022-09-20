@@ -13,10 +13,62 @@
 
   <script>
 
+    de = document.documentElement;
     chatLoader = new QonChatWidgetLoader(
       'qon-chatwidget-div',
       'https://ask.qontextual.jp/chat-widget.html?dataset=faq',
-      {}
-    )
+      {
+        headerBackgroundColor: '#F5A9A8',
+        fontSource:
+          'https://fonts.googleapis.com/css2?family\x3dNoto+Sans+JP:wght@100;300;400;500;700;900\x26display\x3dswap',
+        fontFamily: 'Noto Sans JP',
+        greetingMessage:
+          '\u3054\u89a7\u3044\u305f\u3060\u304d\u3001\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\u3002\u3054\u8cea\u554f\u3092\u9078\u629e\u3044\u305f\u3060\u304f\u304b\u3001\u77ed\u6587\u3067\u5165\u529b\u3057\u691c\u7d22\u3057\u3066\u304f\u3060\u3055\u3044',
+        helpfulFeedbackMessage:
+          '\u3054\u56de\u7b54\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\u3002\u304a\u5f79\u306b\u7acb\u3066\u3066\u3088\u304b\u3063\u305f\u3067\u3059\u3002',
+        noResultMessage:
+          '\x3cp\x3e\u7533\u3057\u8a33\u3054\u3056\u3044\u307e\u305b\u3093\u3002\u8a72\u5f53\u3059\u308b\u8cea\u554f\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f\u3002\u304a\u554f\u5408\u305b\u7a93\u53e3\u3067\u3088\u308a\u8a73\u7d30\u306a\u3054\u6848\u5185\u304c\u3067\u304d\u307e\u3059\u306e\u3067\u3053\u3061\u3089\u306e\x3ca href\x3d"https://www.tempstaff.co.jp/inquiry" target\x3d"_blank" rel\x3d"nofollow noopener"\x3e\u304a\u554f\u5408\u305b\u30d5\u30a9\u30fc\u30e0\x3c/a\x3e\u304b\u3089\u304a\u554f\u5408\u305b\u304f\u3060\u3055\u3044\u3002\x3c/p\x3e',
+        backgroundColor: '#FFFFFF',
+        launcherBackgroundColor: '#CB348F',
+        launcherMessage: '\u8cea\u554f\u3059\u308b',
+        sentMessageBackgroundColor: 'rgba(245, 169, 168, 0.3)',
+        sentMessageTextColor: '#333333',
+        receivedMessageBackgroundColor: '#F0F0F5',
+        suggestBackgroundColor: '#FFFFFF',
+        suggestTextColor: '#555555',
+        suggestHoverColor: 'rgba(245, 234, 234, 1)',
+        suggestAccentColor: '#F5A9A8',
+        receivedMessageTextColor: '#000000',
+        linkTextColor: '#4AB7B4',
+        inputBackgroundColor: '#F0F0F5',
+        inputTextColor: '#555555',
+        launcherBottom: 200,
+        launcherSizeSm: 35,
+        launcherRightSm: -15,
+        launcherBottomSm: 130,
+        launcherSizeIPhone: 35,
+        launcherRightIPhone: -15,
+        launcherBottomIPhone: 130,
+        zoom: de.style.zoom,
+        zIndex: 1500
+      }
+    );
+    window.addEventListener('load', function() {
+      -1 < navigator.userAgent.indexOf('iPhone') &&
+        (QontexualParent.onMessage('openChat', function() {
+          document
+            .querySelector('meta[name\x3d"viewport"]')
+            .setAttribute(
+              'content',
+              'width\x3ddevice-width, initial-scale\x3d1, user-scalable\x3dno'
+            );
+        }),
+        QontexualParent.onMessage('closeChat', function() {
+          document
+            .querySelector('meta[name\x3d"viewport"]')
+            .setAttribute('content', 'width\x3ddevice-width, user-scalable\x3dno');
+        }));
+    });
+
   </script>
 </html>
